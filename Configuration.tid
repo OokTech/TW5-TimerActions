@@ -1,0 +1,48 @@
+title: $:/plugins/OokTech/TimerActions/Configuration
+caption: Configuration
+
+!! Set Interval Delay
+
+This is how often the timer is checked. This is given in ms (milliseconds).
+There are 1000ms in one second.
+
+1000 ms = 1 second
+60000 ms = 1 minute
+
+Values that are too low can cause trouble, values below 100 are disabled using
+this interface.
+If for some reason you want to try values below that you have to manually set
+the value.
+
+A reasonable value is 1000. If you don't have a good reason to change this than
+don't change it.
+
+Current Update Value:
+<$view
+  field='text'
+  tiddler='$:/plugins/OokTech/TimerActions/IntervalDelay'
+>
+  1000
+</$view>
+
+New update value:
+<$edit-text
+  tiddler='$:/temp/OokTech/TimerActions/Configuration'
+  field='text'
+  class='tc-edit-texteditor'
+  tag=input
+/>
+
+<$list
+  filter='[[$:/temp/OokTech/TimerActions/Configuration]get[text]minlength[3]]'
+  emptyMessage='The update value must be at least 100.'
+>
+  <$button>
+    Change Timer Update Value
+    <$action-setfield
+      $tidder='$:/plugins/OokTech/TimerActions/IntervalDelay'
+      $field=text
+      $value={{$:/temp/OokTech/TimerActions/Configuration!!interval_delay}}
+    />
+  </$button>
+</$list>

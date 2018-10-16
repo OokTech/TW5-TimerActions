@@ -1,0 +1,39 @@
+title: $:/plugins/OokTech/TimerActions/readme
+
+!! What does it do?
+
+You create scripts made up of action widgets and then the plugin runs the
+scripts at specific times.
+
+Options include:
+
+* Periodic (Run every n minutes/seconds/hours/days)
+* Run once after some interval (run once after 10 minutes have passed)
+
+!! Limits
+
+This runs in the browser, so the actions only happen if the wiki is open in the
+browser.
+
+The accuracy of the timer is limited. It is possible to make it accurate to the
+millisecond, but that could be very processor intensive because the process has
+to check if there is a task to run every millisecond. The default is to check
+every second, so at most the task could be delayed by one second. If you don't
+require precision than it may be a good idea to make that even longer and
+switch to 5 or 10 seconds.
+
+!! Internals
+
+Each scheduled action has a tiddler that defines it. The tiddler text should
+contain the action widget script to execute. It uses the same thing as the startup actions, so anything that works there should work here too.
+
+* `timer_type` can be `periodic` or `countdown`
+* `period` if the `timer_type` is `periodic` this is the period, if it is `countdown` than this is the length of the countdown.
+* `start` the timestamp for when the countdown/period starts for `periodic` and
+  `countdown` types.
+
+!! For The Future™
+
+* Add another timer type that runs at a specific date/time.
+* Add another timer type that runs periodically based off of calendar events
+  (like every monday, or every day at 10am, etc.)

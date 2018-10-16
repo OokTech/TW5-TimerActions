@@ -1,0 +1,67 @@
+title: $:/plugins/OokTech/TimerActions/New Timer
+caption: New Timer
+
+Timer Name:
+<$edit-text
+  tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
+  field='name'
+  class='tc-edit-texteditor'
+/>
+
+Timer Type:
+<$select
+  tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
+  field='timer_type'
+>
+  <option
+    value=''
+  >
+    --
+  </option>
+  <option
+    value='periodic'
+  >
+    Periodic
+  </option>
+  <option
+    value='countdown'
+  >
+    Countdown
+  </option>
+</$select>
+
+Period:
+<$edit-text
+  tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
+  field='period'
+  class='tc-edit-texteditor'
+/>
+
+Actions:
+
+<$edit-text
+  tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
+  field='text'
+  class='tc-edit-texteditor'
+/>
+
+<$button>
+  Add Timer
+  <$action-setfield
+    $tiddler={{$:/state/plugins/OokTech/TimerActions/NewTimer!!name}}
+    text={{$:/state/plugins/OokTech/TimerActions/NewTimer!!text}}
+    period={{$:/state/plugins/OokTech/TimerActions/NewTimer!!period}}
+    timer_type={{$:/state/plugins/OokTech/TimerActions/NewTimer!!timer_type}}
+  />
+  <$action-setfield
+    $tiddler='$:/plugins/OokTech/TimerActions/TaskList'
+    $index={{$:/state/plugins/OokTech/TimerActions/NewTimer!!name}}
+    $value='false'
+  />
+  <$action-setfield
+    $tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
+    text=''
+    period=''
+    timer_type=''
+  />
+</$button>
