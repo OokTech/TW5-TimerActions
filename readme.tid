@@ -14,6 +14,16 @@ You can open the `Manage Timers` tab in $:/plugins/OokTech/TimerActions to
 start, stop or edit existing timers and the `New Timer` tab to create new
 timers.
 
+!! How to use it
+
+Open the `New Timer` tab. Using the from there give the timer a name (the name becomes a tiddler title so the same restrictions apply). Select the timer type (periodic or countdown), give a period for the timer and finally set the
+action widget that make the script.
+
+After defining the script (or scripts) open the `Manage Timers` tab.
+The select timer input can be used to select a specific timer, or you can pick
+show all and then find the timer in the list.
+Click the `start` button next to the name of the timer you want to start.
+
 !! Limits
 
 This runs in the browser, so the actions only happen if the wiki is open in the
