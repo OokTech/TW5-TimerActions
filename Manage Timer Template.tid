@@ -1,0 +1,112 @@
+title: $:/plugins/OokTech/TimerActions/ManageTimerTemplate
+
+<$button
+  class='tc-btn-invisible'
+  tooltip='Edit Timer'
+>
+  <$list
+    filter='[[$:/state/OokTech/TimerActions/EditingStates]getindex{!!title}][[ThisOne]]+[first[]!prefix[editing]]'
+    variable=null
+    emptyMessage="""
+    {{$:/core/images/done-button}}
+    <$action-setfield
+      $tiddler='$:/state/OokTech/TimerActions/EditingStates'
+      $index={{!!title}}
+      $value="done"
+    />
+    """
+  >
+    {{$:/core/images/edit-button}}
+    <$action-setfield
+      $tiddler='$:/state/OokTech/TimerActions/EditingStates'
+      $index={{!!title}}
+      $value="editing"
+    />
+  </$list>
+</$button>__{{!!title}}__
+<br>
+Active:
+<$list
+  filter='[[$:/plugins/OokTech/TimerActions/TaskList]getindex{!!title}!prefix[false]]'
+  variable=null
+  emptyMessage="""
+  No
+  <$button>
+    Start
+    <$action-setfield
+      $tiddler='$:/plugins/OokTech/TimerActions/TaskList'
+      $index={{!!title}}
+      $value='true'
+    />
+  </$button>
+  """
+>
+  Yes
+  <$button>
+    Stop
+    <$action-setfield
+      $tiddler='$:/plugins/OokTech/TimerActions/TaskList'
+      $index={{!!title}}
+      $value='false'
+    />
+  </$button>
+</$list>
+<br>
+Type:
+<$list
+  filter='[[$:/state/OokTech/TimerActions/EditingStates]getindex{!!title}prefix[editing]]'
+  variable=null
+  emptyMessage="""<$view
+    tiddler={{!!title}}
+    field=timer_type
+  />"""
+>
+  <$select
+    tiddler={{!!title}}
+    field='timer_type'
+  >
+    <option
+      value='periodic'
+    >
+      Periodic
+    </option>
+    <option
+      value='countdown'
+    >
+      Countdown
+    </option>
+  </$select>
+</$list>
+<br>
+Period:
+<$list
+  filter='[[$:/state/OokTech/TimerActions/EditingStates]getindex{!!title}prefix[editing]]'
+  variable=null
+  emptyMessage="""<$view tiddler={{!!title}} field='period'/>"""
+>
+  <$edit-text
+    tiddler={{!!title}}
+    field='period'
+    class='tc-edit-texteditor'
+    tag=input
+  />
+</$list>
+<br>
+<$list
+  filter='[[$:/state/OokTech/TimerActions/EditingStates]getindex{!!title}prefix[editing]]'
+  variable=null
+  emptyMessage="""
+  <br>
+  <$view
+    field='text'
+    tiddler={{!!title}}
+  />
+  <br>
+  """
+>
+  <$edit-text
+    tiddler={{!!title}}
+    class='tc-edit-texteditor'
+  />
+</$list>
+<br>

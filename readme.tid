@@ -10,6 +10,10 @@ Options include:
 * Periodic (Run every n minutes/seconds/hours/days)
 * Run once after some interval (run once after 10 minutes have passed)
 
+You can open the `Manage Timers` tab in $:/plugins/OokTech/TimerActions to
+start, stop or edit existing timers and the `New Timer` tab to create new
+timers.
+
 !! Limits
 
 This runs in the browser, so the actions only happen if the wiki is open in the

@@ -6,12 +6,14 @@ Timer Name:
   tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
   field='name'
   class='tc-edit-texteditor'
+  placeholder='Unique Timer Name'
 />
 
 Timer Type:
 <$select
   tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
   field='timer_type'
+  default=''
 >
   <option
     value=''
@@ -35,6 +37,7 @@ Period:
   tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
   field='period'
   class='tc-edit-texteditor'
+  placeholder='Timer Period (i.e. 1000)'
 />
 
 Actions:
@@ -43,6 +46,7 @@ Actions:
   tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
   field='text'
   class='tc-edit-texteditor'
+  placeholder='Timer Actions'
 />
 
 <$button>
@@ -63,5 +67,6 @@ Actions:
     text=''
     period=''
     timer_type=''
+    name=''
   />
 </$button>

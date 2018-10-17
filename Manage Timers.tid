@@ -11,8 +11,11 @@ Select Timer:
   >
     --
   </option>
+  <option>
+    Show All
+  </option>
   <$list
-    filter='[[$:/plugins/OokTech/TimerActions/TaskList]indexes[]]'
+    filter='[[$:/plugins/OokTech/TimerActions/TaskList]indexes[]search:title{$:/state/plugins/OokTech/TimerActions/NewTimer!!search}]'
   >
     <option
       value=<<currentTiddler>>
@@ -23,78 +26,26 @@ Select Timer:
     </option>
   </$list>
 </$select>
+<$edit-text
+  tiddler='$:/state/plugins/OokTech/TimerActions/NewTimer'
+  field='search'
+  placeholder='Search'
+/>
 
-<$reveal
-  type='nomatch'
-  state='$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer' text=''
+<$list
+  filter='[{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}!prefix[Show All]]'
+  variable=null
+  emptyMessage="""
+  <$list
+    filter='[[$:/plugins/OokTech/TimerActions/TaskList]indexes[]search:title{$:/state/plugins/OokTech/TimerActions/NewTimer!!search}]'
+    template='$:/plugins/OokTech/TimerActions/ManageTimerTemplate'
+    emptyMessage="There are no timers defied. Create one using the [[New Timer Tool|$:/plugins/OokTech/TimerActions/New Timer]]"
+  />
+  """
 >
-  Type:
   <$list
-    filter='[[$:/plugins/OokTech/TimerActions/TaskList]getindex{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}prefix[false]]'
-    emptyMessage="""<$view
-      tiddler={{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}}
-      field=timer_type
-    >"""
-  >
-    <$select
-      tiddler={{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}}
-      field='timer_type'
-    >
-      <option
-        value='periodic'
-      >
-        Periodic
-      </option>
-      <option
-        value='countdown'
-      >
-        Countdown
-      </option>
-    </$select>
-  </$list>
-  <br>
-  Period:
-  <$list
-    filter='[[$:/plugins/OokTech/TimerActions/TaskList]getindex{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}prefix[false]]'
-    emptyMessage="""<$view tiddler={{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}} field='period'/>"""
-  >
-    <$edit-text
-      tiddler={{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}}
-      field='period'
-      class='tc-edit-texteditor'
-      tag=input
-    />
-  </$list>
-  <br>
-  Active:
-  <$list
-    filter='[[$:/plugins/OokTech/TimerActions/TaskList]getindex{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}prefix[false]]'
-    emptyMessage="""
-    Yes
-    <$button>
-      Stop
-      <$action-setfield
-        $tiddler='$:/plugins/OokTech/TimerActions/TaskList'
-        $index={{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}}
-        $value='false'
-      />
-    </$button>
-    """
-  >
-    No
-    <$button>
-      Start
-      <$action-setfield
-        $tiddler='$:/plugins/OokTech/TimerActions/TaskList'
-        $index={{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}}
-        $value='true'
-      />
-    </$button>
-  </$list>
-</$reveal>
-<$reveal
-  type='match'
-  state='$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer' text=''
->
-  Select a timer to modify or create one using the [[New Timer Tool|$:/plugins/OokTech/TimerActions/New Timer]]
-</$reveal>
+    filter='[{$:/state/plugins/OokTech/TimerActions/NewTimer!!selected_timer}has[title]]'
+    template='$:/plugins/OokTech/TimerActions/ManageTimerTemplate'
+    emptyMessage="Select a timer to modify or create one using the [[New Timer Tool|$:/plugins/OokTech/TimerActions/New Timer]]"
+  />
+</$list>
